@@ -1,8 +1,11 @@
-# Raw datasets
-data_raw/
+# Data — never commit raw or processed data
+data/
 
 # Generated outputs and intermediate files
 outputs/
+
+# Trained model artifacts
+models/
 
 # Python cache
 __pycache__/

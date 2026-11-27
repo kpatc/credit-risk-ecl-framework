@@ -1,0 +1,67 @@
+paths:
+  loan_default_csv: data/raw/loan_default/data_raw.csv
+  freddie_mac_dir: data/raw/freddie_mac/
+  outputs: outputs/
+  models: models/
+
+phase1:
+  target: Status
+  test_size: 0.30
+  random_state: 42
+  woe_smoothing: 0.5
+  woe_max_bins: 5
+  ltv_max: 200.0
+  exclude_credit_types:
+    - EQUI
+  numerical_features:
+    - dtir1
+    - LTV
+    - income
+    - property_value
+    - loan_amount
+    - Credit_Score
+  categorical_features:
+    - Neg_ammortization
+    - loan_type
+    - loan_purpose
+    - Credit_Worthiness
+    - business_or_commercial
+    - loan_limit
+    - age
+    - submission_of_application
+    - Region
+
+phase2:
+  target: target_12m
+  group_column: id_loan
+  test_size: 0.20
+  random_state: 42
+  snapshot_period: "202109"
+  default_dpd_threshold: 3
+  numerical_features:
+    - fico
+    - ltv
+    - cltv
+    - dti
+    - orig_upb
+    - orig_int_rt
+    - orig_loan_term
+    - cnt_borr
+    - cnt_units
+    - mi_pct
+  categorical_features:
+    - flag_fthb
+    - occpy_sts
+    - channel
+    - st
+    - prop_type
+    - loan_purpose
+
+lgd_scenarios:
+  optimistic: 0.20
+  base: 0.35
+  adverse: 0.50
+
+model:
+  max_iter: 2000
+  solver: lbfgs
